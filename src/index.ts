@@ -94,7 +94,7 @@ class UsersData {
 		}
 
 		const index: number = this.data.indexOf(user);
-		if (index > -1) { 
+		if (index > -1) {
 			this.data.splice(index, 1);
 			Message.showColorized(Types.success, 'User deleted!');
 		} else {
@@ -116,44 +116,40 @@ console.log("quit – quit the app");
 console.log("\n");
 
 const startApp = () => {
-	const startApp = () => {
-		inquirer.prompt([{
-			name: 'action',
-			type: 'input',
-			message: 'How can I help you?',
-		}]).then(async (answers: InquirerAnswers) => {
-			switch (answers.action) {
-				case Action.List:
-					users.showAll();
-					break;
-				case Action.Add:
-					const user = await inquirer.prompt([{
-						name: 'name',
-						type: 'input',
-						message: 'Enter name',
-					}, {
-						name: 'age',
-						type: 'number',
-						message: 'Enter age',
-					}]);
-					users.add(user);
-					break;
-				case Action.Remove:
-					const name = await inquirer.prompt([{
-						name: 'name',
-						type: 'input',
-						message: 'Enter name',
-					}]);
-					users.remove(name.name);
-					break;
-				case Action.Quit:
-					Message.showColorized(Types.info, "Bye bye!");
-					return;
-			}
-	
-			startApp();
-		});
-	}
+	inquirer.prompt([{
+		name: 'action',
+		type: 'input',
+		message: 'How can I help you?',
+	}]).then(async (answers: InquirerAnswers) => {
+		switch (answers.action) {
+			case Action.List:
+				users.showAll();
+				break;
+			case Action.Add:
+				const user = await inquirer.prompt([{
+					name: 'name',
+					type: 'input',
+					message: 'Enter name',
+				}, {
+					name: 'age',
+					type: 'number',
+					message: 'Enter age',
+				}]);
+				users.add(user);
+				break;
+			case Action.Remove:
+				const name = await inquirer.prompt([{
+					name: 'name',
+					type: 'input',
+					message: 'Enter name',
+				}]);
+				users.remove(name.name);
+				break;
+			case Action.Quit:
+				Message.showColorized(Types.info, "Bye bye!");
+				return;
+		}
+	});
 }
 
 startApp();
